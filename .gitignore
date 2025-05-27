@@ -1,0 +1,28 @@
+# Terraform state
+*.tfstate
+*.tfstate.backup
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Ignore .terraform directories in all folders
+**/.terraform/
+.terraform/
+
+# Sensitive variable files (optional, if you use them)
+*.tfvars
+*.auto.tfvars
+
+# Terraform plan output
+*.tfplan
+
+# Generated import folder (you said you'd delete this eventually)
+generated/
+
+# IDE/Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
