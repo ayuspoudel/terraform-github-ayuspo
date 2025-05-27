@@ -1,8 +1,10 @@
 resource "github_repository" "this" {
-  name               = var.name
-  description        = var.description
-  visibility         = var.visibility
-  archived           = var.archived
+  for_each = var.repositories
+
+  name               = each.value.name
+  description        = each.value.description
+  visibility         = each.value.visibility
+  archived           = each.value.archived
   auto_init          = var.auto_init
   has_issues         = var.has_issues
   has_projects       = var.has_projects
@@ -10,7 +12,7 @@ resource "github_repository" "this" {
   allow_squash_merge = var.allow_squash_merge
   allow_merge_commit = var.allow_merge_commit
   allow_rebase_merge = var.allow_rebase_merge
-  topics             = var.topics
+  topics             = each.value.topics
 
   security_and_analysis {
     secret_scanning {
@@ -20,4 +22,7 @@ resource "github_repository" "this" {
       status = var.secret_scanning_push_protection ? "enabled" : "disabled"
     }
   }
+}
+terraform {
+  backend "s3" {}
 }

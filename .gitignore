@@ -26,3 +26,30 @@ generated/
 *.swp
 *.swo
 .DS_Store
+
+
+# Local Terraform and Terragrunt files
+.terraform/
+.terragrunt-cache/
+**/.terragrunt-cache/
+legacy/.terragrunt-cache/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+*.tfplan
+
+# IDE / Editor metadata
+.vscode/
+.idea/
+*.swp
+
+# Rust build files
+target/
+Cargo.lock
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Dotmanz-generated artifacts (optional)
+.zshrc.dotmanz.bak.*
