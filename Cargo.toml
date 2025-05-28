@@ -2,5 +2,5 @@
 
 [workspace]
 members = [
-  "github-token-gen"
+  "rust-token-fetch"
 ]

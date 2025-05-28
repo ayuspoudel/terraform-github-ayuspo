@@ -5,7 +5,7 @@ import tomli_w as toml
 
 
 ROOT = Path(__file__).resolve().parent.parent
-OUTPUT = ROOT / "github-token-gen" / "repo-groups.toml"
+OUTPUT = ROOT / "rust-token-fetch" / "repo-groups.toml"
 
 def find_repo_hcl_files(root):
     for entry in root.iterdir():

@@ -1,4 +1,4 @@
-# github-token-gen/config.toml
+# rust-token-fetch/config.toml
 
 app_id = "1331774"
 private_key_path = "private-key.pem"
@@ -7,9 +7,7 @@ private_key_path = "private-key.pem"
 legacy = 68637543
 aws = 68637543
 ansible = 68637543
-aws = 68637543
 developed-applications = 68637543
 dynatrace = 68637543
 iac = 68637543
 learnings = 68637543
-legacy = 68637543
