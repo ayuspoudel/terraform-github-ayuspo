@@ -5,7 +5,7 @@
 # Crash logs
 crash.log
 crash.*.log
-
+**/token.json
 # Ignore .terraform directories in all folders
 **/.terraform/
 .terraform/
