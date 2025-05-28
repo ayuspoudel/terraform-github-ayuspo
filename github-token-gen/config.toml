@@ -1,0 +1,4 @@
+# github-token-gen/config.toml
+
+app_id = "392187"
+private_key_path = "private-key.pem"
