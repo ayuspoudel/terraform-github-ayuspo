@@ -1,0 +1,8 @@
+["groups.legacy"]
+repos = [
+    "cpp-library-adt-dsa",
+    "cpp-polish-reverse-polish-converter",
+    "cpp-sorting-techniques",
+    "java-learning-problems",
+    "c-language-projects",
+]
