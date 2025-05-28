@@ -1,41 +1,16 @@
-use chrono::{Duration, Utc};
-use jsonwebtoken::{encode, Algorithm, EncodingKey, Header};
-use serde::Deserialize;
-use std::{fs, path::Path};
+mod jwt;
+mod fetch_token;
+mod config;
 
-#[derive(Debug, Deserialize)]
-struct Config {
-    app_id: String,
-    private_key_path: String,
-}
-
-#[derive(Debug, serde::Serialize)]
-struct Claims {
-    iat: usize,
-    exp: usize,
-    iss: String,
-}
+use crate::config::Config;
+use crate::fetch_token::fetch_and_store_tokens;
 
 fn main() {
-    let config_path = Path::new("github-token-gen/config.toml");
-    let config_str = fs::read_to_string(config_path).expect("Failed to read config.toml");
-    let config: Config = toml::from_str(&config_str).expect("Invalid config format");
-
-    let private_key = fs::read_to_string(&config.private_key_path)
-        .expect("Failed to read private key");
-
-    let now = Utc::now();
-    let claims = Claims {
-        iat: now.timestamp() as usize,
-        exp: (now + Duration::minutes(10)).timestamp() as usize,
-        iss: config.app_id,
-    };
-
-    let encoding_key = EncodingKey::from_rsa_pem(private_key.as_bytes())
-        .expect("Invalid private key");
-
-    let jwt = encode(&Header::new(Algorithm::RS256), &claims, &encoding_key)
-        .expect("Failed to create JWT");
-
-    println!("JWT:\n{}", jwt);
+    let config = Config::load("github-token-gen/config.toml");
+    fetch_and_store_tokens(&config);
 }
+
+
+// curl -s -X GET https://api.github.com/app/installations \
+//   -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDg0NDIwMjMsImV4cCI6MTc0ODQ0MjYyMywiaXNzIjoiMTMzMTc3NCJ9.YSoRThv1CzSjBLK4SIuiqtbgojiLW3QQBMSVnSepNv5Jk0zEI-fh-zwP9ydpmP4t6UTTJ-k7_9CDFVY5viSPLxG-eM82V5ajRzeCUyxHber-EWEzrsfkdvuaFtOoJ11HURxkohayObqWGcL14rG2hxeHlMoOYHxE1agSX25kWpUyKLBOB7uOybNrfLvS2YkfhNzXrYEAuyXo-3nqSzvMTm9aqU9J4nCfzytbmCDaMyLPa2IbNL6oQkmVxVPgKoAgcFkrxnrmXGRD5Qm1Xu-pmPeT5bwxby0GuUInqlb9gyyj6qQL1zATWsd2MiN66_fekomTITRRZMmRAEr_-4vfiA" \
+//   -H "Accept: application/vnd.github+json"
