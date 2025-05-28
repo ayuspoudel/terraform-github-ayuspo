@@ -53,3 +53,10 @@ variable "secret_scanning_push_protection" {
   type    = bool
   default = true
 }
+
+variable "github_token" {
+  description = "GitHub token for authentication"
+  type        = string
+  sensitive   = true
+}
+
