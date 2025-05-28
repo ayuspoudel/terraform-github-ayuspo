@@ -10,17 +10,15 @@ struct Claims {
 }
 
 pub fn generate_jwt(config: &Config) -> String {
-    let private_key_path = config
-        .resolved_private_key_path()
-        .expect("Invalid private key path");
+    let private_key_path = config.resolved_private_key_path();
 
-    println!("🔍 Resolved private key path: {:?}", private_key_path);
+    
 
     let private_key_bytes = std::fs::read(&private_key_path)
-        .expect("Failed to read private key");
+        .expect("❌ Failed to read private key");
 
     let encoding_key = EncodingKey::from_rsa_pem(&private_key_bytes)
-        .expect("Invalid private key");
+        .expect("❌ Invalid private key format");
 
     let now = Utc::now();
     let claims = Claims {
@@ -30,5 +28,5 @@ pub fn generate_jwt(config: &Config) -> String {
     };
 
     encode(&Header::new(Algorithm::RS256), &claims, &encoding_key)
-        .expect("Failed to create JWT")
+        .expect("❌ Failed to create JWT")
 }
