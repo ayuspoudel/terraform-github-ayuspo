@@ -25,7 +25,6 @@ def extract_repo_names(hcl_file):
                 repo_name = repo_data.get("name")
                 if repo_name:
                     names.append(repo_name)
-    print(names)
     return names
 
 def main():

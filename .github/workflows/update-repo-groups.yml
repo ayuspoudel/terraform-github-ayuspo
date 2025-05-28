@@ -1,0 +1,71 @@
+name: Update repo-groups
+
+on:
+  push:
+    paths:
+      - '**/repos.hcl'
+      - 'scripts/update-repo-groups.py'
+      - '.github/workflows/update-repo-groups.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  update-repos:
+    runs-on: ubuntu-latest
+    env:
+      BRANCH_NAME: update/repo-groups-${{ github.run_id }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install python-hcl2 tomli-w
+
+      - name: Run script
+        run: python scripts/update-repo-groups.py
+
+      - name: Create branch
+        run: |
+          git config user.name "ayuspoudel-bot"
+          git config user.email "actions@github.com"
+          git checkout -b $BRANCH_NAME
+          git add github-token-gen/repo-groups.toml
+          git commit -m "chore: update repo-groups.toml" || echo "No changes to commit"
+
+      - name: Push branch
+        run: git push origin $BRANCH_NAME
+
+      - name: Create issue
+        id: create_issue
+        run: |
+          ISSUE=$(gh issue create --title "Update repo-groups.toml" --body "Auto-update from script for repo groups" --repo "$GITHUB_REPOSITORY" --json number --jq .number)
+          echo "ISSUE_NUMBER=$ISSUE" >> "$GITHUB_ENV"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create PR
+        id: create_pr
+        run: |
+          PR_URL=$(gh pr create --title "chore: update repo-groups.toml" \
+                                --body "Closes #${{ env.ISSUE_NUMBER }}" \
+                                --head "$BRANCH_NAME" --base main \
+                                --repo "$GITHUB_REPOSITORY" --json url --jq .)
+          echo "PR_URL=$PR_URL" >> "$GITHUB_ENV"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Enable auto-merge
+        run: gh pr merge "$PR_URL" --merge --delete-branch --repo "$GITHUB_REPOSITORY"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

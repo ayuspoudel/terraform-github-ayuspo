@@ -1,0 +1,6 @@
+# terraform-github-ayuspo/Cargo.toml
+
+[workspace]
+members = [
+  "github-token-gen"
+]
