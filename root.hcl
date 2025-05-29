@@ -3,18 +3,18 @@ locals {
   bucket         = "terraform-backend-ayush-bucket"
   dynamodb_table = "terraform-backend-ayush-locks"
 
+  # Don't hardcode the token; expect .auto.tfvars.json to provide it
   common_inputs = {
-    github_token                     = "REPLACE_ME"
+    github_token                     = get_env("TF_VAR_github_token", "override-if-needed")  # fallback
     has_issues                       = true
     has_projects                     = true
     has_wiki                         = true
     auto_init                        = true
     allow_squash_merge               = true
     allow_merge_commit               = true
-    allow_rebase_merge               = true
+    allow_rebase_merge              = true
     secret_scanning                  = true
     secret_scanning_push_protection = true
-    github_token = get_env("TF_VAR_github_token", "override-if-needed")
   }
 }
 
