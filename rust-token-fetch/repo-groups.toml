@@ -6,3 +6,16 @@ repos = [
     "java-learning-problems",
     "c-language-projects",
 ]
+
+["groups.web-development"]
+repos = [
+    "blog-microservices-app",
+    "Amazon-Website-Clone-Project-2024",
+    "my-portfolio",
+    "Weather-App-Project",
+    "Drop-Down-Menu-Project-JS",
+    "JavaScript-Encompassing-Data-Structures-to-DOM-to-Node-",
+    "Green-Rise-Nepal-Full-Stack-Project",
+    "Projects-JavaScript",
+    "Flat-Guru-at-USF",
+]

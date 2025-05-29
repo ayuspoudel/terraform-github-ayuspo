@@ -60,3 +60,4 @@ Thumbs.db
 .terraform/
 *.tfplan
 test/
+**/github.auto.tfvars.json
