@@ -3,7 +3,8 @@ name: Release terraform-provider-ghapptoken
 on:
   push:
     tags:
-      - 'terraform-provider-ghapptoken/v*'  # Only triggers on tags like ghapptoken/v0.1.0
+      - 'terraform-provider-ghapptoken/v*'  # e.g. terraform-provider-ghapptoken/v0.1.0
+
 permissions:
   contents: write
 
@@ -26,17 +27,30 @@ jobs:
         with:
           go-version: '1.21'
 
-      - name: Build binary
+      - name: Extract version
+        id: version
         run: |
-          cd terraform-provider-ghapptoken
-          mkdir -p ../dist
-          GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} \
-          go build -o ../dist/terraform-provider-ghapptoken_${{ matrix.goos }}_${{ matrix.goarch }}
+          echo "VERSION=${GITHUB_REF#refs/tags/terraform-provider-ghapptoken/v}" >> $GITHUB_OUTPUT
 
-      - name: Upload release artifact
+      - name: Build and Zip
+        run: |
+          mkdir -p dist
+          cd terraform-provider-ghapptoken
+          GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -o ../dist/terraform-provider-ghapptoken_v${{ steps.version.outputs.VERSION }}_${{ matrix.goos }}_${{ matrix.goarch }}
+          cd ../dist
+          zip terraform-provider-ghapptoken_v${{ steps.version.outputs.VERSION }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip terraform-provider-ghapptoken_v${{ steps.version.outputs.VERSION }}_${{ matrix.goos }}_${{ matrix.goarch }}
+
+      - name: Generate SHA256SUMS
+        run: |
+          cd dist
+          shasum -a 256 terraform-provider-ghapptoken_v${{ steps.version.outputs.VERSION }}_* > terraform-provider-ghapptoken_v${{ steps.version.outputs.VERSION }}_SHA256SUMS
+
+      - name: Upload release assets
         uses: softprops/action-gh-release@v1
         with:
-          name: terraform-provider-ghapptoken
-          files: dist/terraform-provider-ghapptoken_*
+          name: terraform-provider-ghapptoken v${{ steps.version.outputs.VERSION }}
+          files: |
+            dist/terraform-provider-ghapptoken_v${{ steps.version.outputs.VERSION }}_*.zip
+            dist/terraform-provider-ghapptoken_v${{ steps.version.outputs.VERSION }}_SHA256SUMS
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
