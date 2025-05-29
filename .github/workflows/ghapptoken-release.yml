@@ -3,7 +3,7 @@ name: Release terraform-provider-ghapptoken
 on:
   push:
     tags:
-      - 'ghapptoken/v*'  # Only triggers on tags like ghapptoken/v0.1.0
+      - 'terraform-provider-ghapptoken/v*'  # Only triggers on tags like ghapptoken/v0.1.0
 
 jobs:
   release:
