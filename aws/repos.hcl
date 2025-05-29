@@ -1,51 +1,65 @@
 locals {
   aws_repositories = {
     aws_notes = {
-      name        = "AWS-Notes"
-      description = "Organized notes on various AWS services like VPC, EC2, S3, IAM, and more."
+      name        = "aws-service-notes"
+      description = "Organized and structured notes on AWS core services like EC2, IAM, S3, VPC, and more — ideal for certification prep or internal knowledge base."
       visibility  = "public"
       archived    = false
-      topics      = ["aws", "notes", "cloud"]
+      has_downloads = true
+      topics      = ["aws", "notes", "learning", "services"]
     }
 
     aws_scripting = {
-      name        = "AWS-Scripting"
-      description = "Reusable CLI scripts to create, delete, list, and connect various AWS resources."
+      name        = "aws-cli-automation-scripts"
+      description = "Reusable CLI-based scripts to create, delete, and manage AWS resources efficiently. Focused on practical cloud automation."
       visibility  = "public"
       archived    = false
-      topics      = ["aws", "cli", "scripts"]
+      has_downloads = true
+      topics      = ["aws", "cli", "automation", "scripts"]
     }
 
     aws_three_tier = {
-      name        = "AWS-Three-Tier-Web-Architecture"
-      description = "Robust three-tier web architecture deployed on AWS using services like ALB, EC2, and RDS."
+      name        = "aws-3tier-web-architecture"
+      description = "designed and implemented a robust three-tier web architecture on AWS, utilizing a comprehensive suite of AWS services to achieve scalability, security, and high availability"
       visibility  = "public"
       archived    = false
-      topics      = ["aws", "architecture", "three-tier"]
+      has_downloads = true
+      topics      = ["aws", "architecture", "three-tier", "ec2", "rds", "vpc", "alb"]
     }
 
     end_to_end_devops = {
-      name        = "end-to-end-devops-microservices"
-      description = "End-to-end DevOps project with IaC, CI/CD, container orchestration, and monitoring."
+      name        = "aws-cloud-native-microservices-deployment"
+      description = "End-to-end devops implementation with IaC, Automation, Containerization and Orchestration for an open source open telemetry e-commerce application"
       visibility  = "public"
       archived    = false
-      topics      = ["aws", "devops", "microservices"]
+      has_downloads = true
+      topics      = ["aws", "kubernetes", "microservices", "devops", "cicd", "monitoring", "terraform"]
     }
 
     serverless_github_jira = {
-      name        = "serverless-github-jira-automation"
-      description = "Serverless backend to automate Jira ticket creation from GitHub issues using Python and AWS."
+      name        = "aws-lambda-serverless-jira-github-sync"
+      description = "Event-driven AWS Lambda project to automate Jira issue creation from GitHub events using a fully serverless architecture."
       visibility  = "public"
       archived    = false
-      topics      = ["aws", "serverless", "automation"]
+      has_downloads = true
+      topics      = ["aws", "lambda", "serverless", "jira", "github", "automation"]
     }
 
     cloud_iac_monorepo = {
-      name        = "cloud-iac-monorepo"
-      description = "Monorepo with Terraform configurations and reusable modules for personal cloud projects."
+      name        = "aws-iac-terraform-monorepo"
+      description = "It contains my personal projects' Infrastructure Definition as Code in HCL with reusable modules defined for AWS resources used in the projects. It uses terraform workspaces to separate the projects, the workspace name reflects an actual repo name in this account. Contributions are welcomed :)"
       visibility  = "public"
       archived    = false
-      topics      = ["aws", "iac", "terraform"]
+      has_downloads = true
+      topics      = ["aws", "terraform", "iac", "modules", "devops"]
+    }
+    aws_mongodb_cluster = {
+      name        = "aws-mongodb-ha-replicaset-cluster"
+      description = "A end-to-end terraform + ansible script to deploy highly scalable, persistent, self healing HA MongoDB cluster"
+      visibility  = "public"
+      archived    = false
+      has_downloads = true
+      topics      = ["aws", "mongodb", "high-availability", "ecs", "replica-set", "database"]
     }
   }
 }
