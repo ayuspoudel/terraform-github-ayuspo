@@ -13,7 +13,7 @@ repos = [
 
 ["groups.dynatrace"]
 repos = [
-    "dynatrace-hybrid-monaco",
+    "dynatrace-terraform-observability-dashboards",
 ]
 
 ["groups.legacy"]
@@ -27,8 +27,8 @@ repos = [
 
 ["groups.ansible"]
 repos = [
-    "Ansible-Windows-Bootstrap",
-    "Ansible-Playbook-Projects",
+    "ansible-windows-bootstrap",
+    "ansible-playbooks-common-devops",
 ]
 
 ["groups.developed-applications"]
@@ -49,12 +49,13 @@ repos = [
 
 ["groups.aws"]
 repos = [
-    "AWS-Notes",
-    "AWS-Scripting",
-    "AWS-Three-Tier-Web-Architecture",
-    "end-to-end-devops-microservices",
-    "serverless-github-jira-automation",
-    "cloud-iac-monorepo",
+    "aws-service-notes",
+    "aws-cli-automation-scripts",
+    "aws-3tier-web-architecture",
+    "aws-cloud-native-microservices-deployment",
+    "aws-lambda-serverless-jira-github-sync",
+    "aws-iac-terraform-monorepo",
+    "aws-mongodb-ha-replicaset-cluster",
 ]
 
 ["groups.web-development"]
