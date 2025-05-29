@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - 'terraform-provider-ghapptoken/v*'  # Only triggers on tags like ghapptoken/v0.1.0
+permissions:
+  contents: write
 
 jobs:
   release:
