@@ -66,15 +66,15 @@ pub fn fetch_and_store_tokens(config: &Config, target_group: Option<&str>) {
         let tfvars_dir = Path::new(&tfvars_path).parent().unwrap();
 
         if !tfvars_dir.exists() {
-            panic!("❌ Target directory does not exist: {}", tfvars_dir.display());
+            panic!(" Target directory does not exist: {}", tfvars_dir.display());
         }
 
         println!("Writing token to: {}", tfvars_path);
 
         let tfvars_content = json!({ "github_token": token_res.token });
         fs::write(&tfvars_path, tfvars_content.to_string())
-            .expect("❌ Failed to write .auto.tfvars.json");
+            .expect(" Failed to write .auto.tfvars.json");
 
-        println!("✅ Successfully wrote token to file.");
+        println!(" Successfully wrote token to file.");
     }
 }
