@@ -1,7 +1,7 @@
 locals {
   legacy_repositories = {
     cpp_library_dsa = {
-      name        = "cpp-library-adt-dsa"
+      name        = "legacy-cpp-library-adt-dsa"
       description = "This repository contains C++, HPP, and EXE files for various ADTs and DSs."
       visibility  = "public"
       archived    = false
@@ -9,7 +9,7 @@ locals {
     }
 
     polish_converter = {
-      name        = "cpp-polish-reverse-polish-converter"
+      name        = "legacy-cpp-polish-reverse-polish-converter"
       description = "Converter for infix to Reverse Polish & Polish notation using C++"
       visibility  = "private"
       archived    = false
@@ -17,7 +17,7 @@ locals {
     }
 
     sorting_techniques = {
-      name        = "cpp-sorting-techniques"
+      name        = "legacy-cpp-sorting-techniques"
       description = "Comparison-based and index-based sorting algorithms in C++"
       visibility  = "private"
       archived    = false
@@ -25,7 +25,7 @@ locals {
     }
 
     java_learning = {
-      name        = "java-learning-problems"
+      name        = "legacy-java-learning-problems"
       description = "Java DSA + OOP problems for interviews"
       visibility  = "public"
       archived    = false
@@ -33,7 +33,7 @@ locals {
     }
 
     projects_in_c = {
-      name        = "c-language-projects"
+      name        = "legacy-c-language-projects"
       description = "C language projects from coursework"
       visibility  = "public"
       archived    = false

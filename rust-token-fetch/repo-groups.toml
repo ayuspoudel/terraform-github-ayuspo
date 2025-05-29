@@ -1,21 +1,71 @@
+["groups.misc"]
+repos = [
+    "ayuspoudel",
+    "Resume",
+]
+
+["groups.terraform"]
+repos = [
+    "Terraform-best-methods",
+    "terraform-github-ayuspo",
+    "Terraform-Automation-Projects",
+]
+
+["groups.dynatrace"]
+repos = [
+    "dynatrace-hybrid-monaco",
+]
+
 ["groups.legacy"]
 repos = [
-    "cpp-library-adt-dsa",
-    "cpp-polish-reverse-polish-converter",
-    "cpp-sorting-techniques",
-    "java-learning-problems",
-    "c-language-projects",
+    "legacy-cpp-library-adt-dsa",
+    "legacy-cpp-polish-reverse-polish-converter",
+    "legacy-cpp-sorting-techniques",
+    "legacy-java-learning-problems",
+    "legacy-c-language-projects",
+]
+
+["groups.ansible"]
+repos = [
+    "Ansible-Windows-Bootstrap",
+    "Ansible-Playbook-Projects",
+]
+
+["groups.developed-applications"]
+repos = [
+    "dotmanz",
+    "homebrew-dotmanz",
+]
+
+["groups.ops"]
+repos = [
+    "observability-zero-to-hero",
+    "vm-health-check",
+    "Shell-Scripting-Projects",
+    "CICD-Pipeline-Implementation-Jenkins-ArgoCD-Kubernetes",
+    "kubernetes-demo-app",
+    "Python",
+]
+
+["groups.aws"]
+repos = [
+    "AWS-Notes",
+    "AWS-Scripting",
+    "AWS-Three-Tier-Web-Architecture",
+    "end-to-end-devops-microservices",
+    "serverless-github-jira-automation",
+    "cloud-iac-monorepo",
 ]
 
 ["groups.web-development"]
 repos = [
-    "blog-microservices-app",
-    "Amazon-Website-Clone-Project-2024",
-    "my-portfolio",
-    "Weather-App-Project",
-    "Drop-Down-Menu-Project-JS",
-    "JavaScript-Encompassing-Data-Structures-to-DOM-to-Node-",
-    "Green-Rise-Nepal-Full-Stack-Project",
-    "Projects-JavaScript",
-    "Flat-Guru-at-USF",
+    "webdev-clone-amazon",
+    "webdev-tool-microservices-blog",
+    "webdev-ui-dropdown-menu",
+    "webdev-app-flat-guru-usf",
+    "webdev-app-green-rise-nepal",
+    "webdev-learn-js-journey",
+    "webdev-portfolio-main",
+    "webdev-learn-js-projects",
+    "webdev-app-weather",
 ]
