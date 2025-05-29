@@ -59,6 +59,9 @@ pub fn fetch_and_store_tokens(config: &Config, target_group: Option<&str>) {
         let token_res: InstallationTokenResponse =
             res.json().expect("Failed to deserialize token response");
 
-        println!("{}", token_res.token);
+        let tfvars_path = format!("./{}/github.auto.tfvars.json", group_name);
+        let tfvars_content = json!({ "gh_token": token_res.token });
+        fs::write(&tfvars_path, tfvars_content.to_string()).expect("Failed to write .auto.tfvars.json");
+
     }
 }
