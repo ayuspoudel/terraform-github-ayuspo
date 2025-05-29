@@ -1,0 +1,39 @@
+name: Release Terraform Provider: ghapptoken
+
+on:
+  push:
+    tags:
+      - 'terraform-provider-ghapptoken/v*.*.*'
+
+jobs:
+  release:
+    if: contains(github.ref, 'refs/tags/terraform-provider-ghapptoken/')
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        goos: [linux, darwin, windows]
+        goarch: [amd64]
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+
+      - name: Build binary
+        run: |
+          cd terraform-provider-ghapptoken
+          mkdir -p ../release
+          GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} \
+            go build -o ../release/terraform-provider-ghapptoken_${{ matrix.goos }}_${{ matrix.goarch }}
+
+      - name: Upload binary to GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: release/terraform-provider-ghapptoken_*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

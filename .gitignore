@@ -53,3 +53,11 @@ Thumbs.db
 
 # Dotmanz-generated artifacts (optional)
 .zshrc.dotmanz.bak.*
+
+# Dev + Build artifacts
+/bin/
+terraform-provider-ghapptoken/
+.venv/
+*.tfstate*
+.terraform/
+*.tfplan
