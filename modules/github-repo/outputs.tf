@@ -1,6 +1,8 @@
 
 
-output "repositories" {
+
+ 
+ output "repositories" {
   value = {
     for k, repo in github_repository.this :
     k => {
@@ -9,4 +11,5 @@ output "repositories" {
       id   = repo.node_id
     }
   }
+  sensitive = false
 }

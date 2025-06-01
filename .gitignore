@@ -61,3 +61,4 @@ Thumbs.db
 *.tfplan
 test/
 **/github.auto.tfvars.json
+**/secrets.yaml

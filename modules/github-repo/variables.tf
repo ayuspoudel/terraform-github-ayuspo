@@ -59,4 +59,9 @@ variable "github_token" {
   type        = string
   sensitive   = true
 }
-
+ 
+variable "secrets" {
+  description = "Map of secrets to set per repository (optional)"
+  type = map(map(string))
+  default = {}
+}
