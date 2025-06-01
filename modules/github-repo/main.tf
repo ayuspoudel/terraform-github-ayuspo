@@ -1,6 +1,6 @@
 resource "github_repository" "this" {
   for_each = var.repositories
-
+ 
   name               = each.value.name
   description        = each.value.description
   visibility         = each.value.visibility
@@ -26,3 +26,23 @@ resource "github_repository" "this" {
 terraform {
   backend "s3" {}
 }
+
+resource "github_actions_secret" "repo_secrets" {
+  for_each = {
+  for key in flatten([
+    for repo_key, repo_secrets in var.secrets : [
+      for secret_key, secret_value in repo_secrets : {
+        composite_key = "${repo_key}__${secret_key}"
+        repository    = repo_key
+        secret_name   = secret_key
+        secret_value  = secret_value
+      }
+    ]
+  ]) : key.composite_key => key
+}
+  repository      = github_repository.this[each.value.repository].name
+  secret_name     = each.value.secret_name
+  plaintext_value = each.value.secret_value
+}
+
+
