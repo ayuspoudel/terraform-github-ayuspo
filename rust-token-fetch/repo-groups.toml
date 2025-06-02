@@ -1,22 +1,10 @@
-["groups.misc"]
+["groups.repo-ansible"]
 repos = [
-    "ayuspoudel",
-    "Resume",
+    "ansible-windows-bootstrap",
+    "ansible-playbooks-common-devops",
 ]
 
-["groups.terraform"]
-repos = [
-    "Terraform-best-methods",
-    "terraform-github-ayuspo",
-    "Terraform-Automation-Projects",
-]
-
-["groups.dynatrace"]
-repos = [
-    "dynatrace-terraform-observability-dashboards",
-]
-
-["groups.legacy"]
+["groups.repo-legacy"]
 repos = [
     "legacy-cpp-library-adt-dsa",
     "legacy-cpp-polish-reverse-polish-converter",
@@ -25,40 +13,7 @@ repos = [
     "legacy-c-language-projects",
 ]
 
-["groups.ansible"]
-repos = [
-    "ansible-windows-bootstrap",
-    "ansible-playbooks-common-devops",
-]
-
-["groups.developed-applications"]
-repos = [
-    "dotmanz",
-    "homebrew-dotmanz",
-]
-
-["groups.ops"]
-repos = [
-    "observability-zero-to-hero",
-    "vm-health-check",
-    "Shell-Scripting-Projects",
-    "CICD-Pipeline-Implementation-Jenkins-ArgoCD-Kubernetes",
-    "kubernetes-demo-app",
-    "Python",
-]
-
-["groups.aws"]
-repos = [
-    "aws-service-notes",
-    "aws-cli-automation-scripts",
-    "aws-3tier-web-architecture",
-    "aws-cloud-native-microservices-deployment",
-    "aws-lambda-serverless-jira-github-sync",
-    "aws-iac-terraform-monorepo",
-    "aws-mongodb-ha-replicaset-cluster",
-]
-
-["groups.web-development"]
+["groups.repo-web-development"]
 repos = [
     "webdev-clone-amazon",
     "webdev-tool-microservices-blog",
@@ -69,4 +24,47 @@ repos = [
     "webdev-portfolio-main",
     "webdev-learn-js-projects",
     "webdev-app-weather",
+]
+
+["groups.repo-developed-applications"]
+repos = [
+    "dmz",
+    "homebrew-dmz",
+]
+
+["groups.repo-aws"]
+repos = [
+    "aws-service-notes",
+    "aws-cli-automation-scripts",
+    "aws-3tier-web-architecture",
+    "aws-cloud-native-microservices-deployment",
+    "aws-lambda-serverless-jira-github-sync",
+    "aws-iac-terraform-monorepo",
+    "aws-mongodb-ha-replicaset-cluster",
+]
+
+["groups.repo-dynatrace"]
+repos = [
+    "dynatrace-terraform-observability-dashboards",
+]
+
+["groups.repo-terraform"]
+repos = [
+    "Terraform-best-methods",
+    "terraform-github-ayuspo",
+    "Terraform-Automation-Projects",
+]
+
+["groups.repo-misc"]
+repos = [
+    "ayuspoudel-resume",
+    "ayuspoudel",
+]
+
+["groups.repo-ops"]
+repos = [
+    "ops-shell-scripting-automation",
+    "ops-cicd-pipeline-jenkins-argocd-k8s",
+    "ops-kubernetes-demo-application",
+    "ops-python-infra-utilities",
 ]
