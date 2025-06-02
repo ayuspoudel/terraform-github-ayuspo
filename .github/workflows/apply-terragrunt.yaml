@@ -39,14 +39,26 @@ jobs:
           python .pipeline/generate-repo-csv.py
           python .pipeline/update-repo-groups.py
           python .pipeline/sync-config.py
-    
+      - name: Create GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.GITHUB_APP_PRIVATE_KEY }}
+      - name: Checkout with App Token
+        uses: actions/checkout@v4
+        with:
+            token: ${{ steps.generate-token.outputs.token }}
       - name: Commit & Push changes
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .
           git diff --cached --quiet || git commit -m "ci: auto-sync config and workflows"
-          git push
+          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }} HEAD:main
+
       
       - name: Write GitHub App private key to rust-token-fetch/
         run: |
