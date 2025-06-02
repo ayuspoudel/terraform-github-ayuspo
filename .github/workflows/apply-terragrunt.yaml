@@ -63,7 +63,7 @@ jobs:
       - name: Write GitHub App private key to rust-token-fetch/
         run: |
           mkdir -p rust-token-fetch
-          echo "${{ secrets.GITHUB_APP_PRIVATE_KEY }}" > rust-token-fetch/private_key.pem
+          echo "${{ secrets.APP_PRIVATE_KEY }}" > rust-token-fetch/private_key.pem
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
