@@ -1,4 +1,6 @@
 name: Apply Terragrunt
+permissions:
+  contents: write
 
 on:
   push:
