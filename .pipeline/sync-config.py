@@ -71,8 +71,10 @@ def main():
         f.write(toml.dumps(config_data).encode("utf-8"))
     print(f"Synced config: {CONFIG_PATH}")
 
-    # Update workflow
-    update_workflow_yaml(WORKFLOW_PATH, detected_groups)
+    # Update workflow with repo CSV
+    repo_csv_path = ROOT / ".artifacts" / "repos.csv"
+    update_workflow_yaml(WORKFLOW_PATH, repo_csv_path)
+
 
 if __name__ == "__main__":
     main()
