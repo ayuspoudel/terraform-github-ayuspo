@@ -85,6 +85,10 @@ jobs:
           chmod +x terragrunt
           sudo mv terragrunt /usr/local/bin/terragrunt
 
+      - name: Run Terragrunt Init
+        working-directory: ${{ steps.changes.outputs.folder }}
+        run: terragrunt init
+
       - name: Run Terragrunt Apply
         working-directory: ${{ steps.changes.outputs.folder }}
         run: terragrunt apply -auto-approve
