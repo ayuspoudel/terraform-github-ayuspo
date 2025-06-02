@@ -43,6 +43,9 @@ jobs:
           git add github-token-gen/repo-groups.toml
           git commit -m "chore: update repo-groups.toml" || echo "No changes to commit"
 
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Push branch
         run: git push origin $BRANCH_NAME
 

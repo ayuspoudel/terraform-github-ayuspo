@@ -1,0 +1,69 @@
+name: Apply Terragrunt
+
+on:
+  push:
+    branches:
+      - main
+env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+jobs:
+  detect-and-apply:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Get modified top-level folders
+        id: changes
+        run: |
+          folder=$(git diff --name-only HEAD^ HEAD | cut -d/ -f1 | grep '^repo-' | sort -u | head -n1)
+          echo "folder=${folder}" >> $GITHUB_OUTPUT
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python requirements
+        run: pip install -r .pipeline/requirements-dev.txt
+
+      - name: Run all pipeline sync scripts
+        run: |
+          python .pipeline/generate-repo-csv.py
+          python .pipeline/update-repo-groups.py
+          python .pipeline/sync-config.py
+    
+      - name: Commit & Push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git diff --cached --quiet || git commit -m "ci: auto-sync config and workflows"
+          git push
+      
+      - name: Write GitHub App private key to rust-token-fetch/
+        run: |
+          mkdir -p rust-token-fetch
+          echo "${{ secrets.GITHUB_APP_PRIVATE_KEY }}" > rust-token-fetch/private_key.pem
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Run rust-token-fetch
+        run: cargo run --bin rust-token-fetch -- ${{ steps.changes.outputs.folder }}
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.6
+
+      - name: Install Terragrunt
+        run: |
+          curl -L https://github.com/gruntwork-io/terragrunt/releases/latest/download/terragrunt_linux_amd64 -o terragrunt
+          chmod +x terragrunt
+          sudo mv terragrunt /usr/local/bin/terragrunt
+
+      - name: Run Terragrunt Apply
+        working-directory: ${{ steps.changes.outputs.folder }}
+        run: terragrunt apply -auto-approve

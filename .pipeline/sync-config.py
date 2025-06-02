@@ -33,19 +33,33 @@ def sync_groups(existing_groups, detected_groups, default_id):
 
 
 
-def update_workflow_yaml(workflow_path, new_options):
+def update_workflow_yaml(workflow_path, repo_csv_path):
     yaml = YAML()
     yaml.preserve_quotes = True
 
+    # Step 1: Load workflow YAML
     with workflow_path.open("r") as f:
         data = yaml.load(f)
 
-    data["on"]["workflow_dispatch"]["inputs"]["target_directory"]["options"] = sorted(new_options)
+    # Step 2: Load state names from CSV
+    state_names = set()
+    with repo_csv_path.open("r") as f:
+        next(f)  # skip header
+        for line in f:
+            parts = line.strip().split(",")
+            if len(parts) == 3:
+                _, _, state_name = parts
+                state_names.add(state_name)
 
+    # Step 3: Replace workflow input options
+    data["on"]["workflow_dispatch"]["inputs"]["repository_name"]["options"] = sorted(state_names)
+
+    # Step 4: Save workflow YAML
     with workflow_path.open("w") as f:
         yaml.dump(data, f)
 
-    print(f"Updated: {workflow_path}")
+    print(f"Updated workflow input options with state names from: {repo_csv_path}")
+
 
 def main():
     detected_groups = find_repo_group_folders(ROOT)
