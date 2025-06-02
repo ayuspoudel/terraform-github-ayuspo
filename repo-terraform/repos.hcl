@@ -23,5 +23,18 @@ locals {
       archived    = false
       topics      = ["terraform", "automation", "aws"]
     }
+
+    oidc_auth  = {
+      name               = "terraform-oidc-authentication-manager"
+      description        = "Terraform configurations for managing AWS IAM roles and OIDC trust policies for secure authentication across external identity providers such as GitHub Actions, CI/CD systems, or federated applications. Designed for centralized, reusable, and least-privilege access control."
+      visibility         = "public"
+      archived           = false
+      topics             = ["terraform", "aws", "iam", "oidc", "authentication", "access-control"]
+      auto_init          = true
+      license_template   = "mit"
+      gitignore_template = "Terraform"
+  
+
+    }
   }
 }
